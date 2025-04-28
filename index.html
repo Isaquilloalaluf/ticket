@@ -13,37 +13,33 @@
             text-align: center; /* Centrar todo el contenido */
         }
 
-
         #thermal-pos {
            
             margin: none;
             max-width: 60mm;
-           
+            
         }
-
 
         .label {
             margin: 0;
             margin-left: 0.5mm;
         }
 
-
         .table {
-         
+          
             border-collapse: collapse; /* Elimina el espacio entre celdas */
             border-collapse: collapse;
             border-spacing: 0;
-           
+            
         }
-
 
         .table-header h2 {
             margin: 0;
             padding-left: 0.5mm;
-           
+            
         }
         .table-footer.top-line td,
-       
+        
         .table-footer {
             margin-left: 0.5mm;
         }
@@ -60,11 +56,9 @@
             margin-left: 0.1mm;
         }
 
-
         .policy {
             margin-left: 0.5mm;
         }
-
 
       /* Agrega el estilo para eliminar el espacio vertical en las celdas de las filas de la tabla */
       .table-footer td {
@@ -81,7 +75,7 @@
     .fecha_recepcion {
         margin: 0;
     }
-   
+    
     .info-tienda {
         margin: 0;
     }
@@ -91,35 +85,30 @@
     }
     .direccion {
         margin: 0;
-       
+        
     }
- 
-
+  
 
     </style>
   </head>
   <body onload="window.print()" onfocus="window.close()">
 
-
     <script>
         // Obtener los parámetros de la URL
         const params = new URLSearchParams(window.location.search);
-
 
         // Obtener los valores de los parámetros
         var nro_boleta = params.has('boleta') ? params.get('boleta') : "---";
         var nro_mesa = params.has('mesa') ? params.get('mesa') : "---";
         var direc = params.has('direccion') ? params.get('direccion') : "---";
         var lote = params.has('lote') ? params.get('lote') : "---";
-       
-       
-
+        
+        
 
         var fecha = params.has('fecha') ? params.get('fecha') : "dd/mm/aaaa hh:mm:ss";
         var fecha_entrega = params.has('fecha_entrega') ? params.get('fecha_entrega') : "hh:mm:ss";
         var domi = params.has('domi') ? params.get('domi') : "N/A";
         var propina = params.has('propina') ? params.get('propina') : "N/A";
-
 
         var total = params.has('total') ? params.get('total') : "";
         var subtotal_desc = params.has('subtotal_desc') ? params.get('subtotal_desc') : "0";
@@ -127,29 +116,26 @@
         var mediodepago = params.has('mediodepago') ? params.get('mediodepago') : "EFECTIVO";
         var estado = params.has('estado') ? params.get('estado') : "--";
 
-
         //Recibe los datos de los servicios (separados por comas)
         var cantidades = params.has('cantidades') ? params.get('cantidades') : "0";
         var descripciones = params.has('servicios') ? params.get('servicios') : "No hay articulos";
         var p_units = params.has('p_unit') ? params.get('p_unit') : "0.00";
-       
+        
         //Formato de 2 decimales
         propina = parseFloat(propina).toLocaleString('es-ES', { minimumFractionDigits: 0 });
         domi = parseFloat(domi).toLocaleString('es-ES', { minimumFractionDigits: 0 });
         total = parseFloat(total).toLocaleString('es-ES', { minimumFractionDigits: 0 });
         descuento = parseFloat(descuento).toLocaleString('es-ES', { minimumFractionDigits: 0 });
         subtotal_desc = parseFloat(subtotal_desc).toLocaleString('es-ES', { minimumFractionDigits: 0 });
-       
+        
         //crea una lista de cada columna a partir de las comas.
         cantidades = cantidades.split(",");
-        descripciones = descripciones.split(",");
+        descripciones = descripciones.split(","); 
         p_units = p_units.split(",");
         lote = lote.split(",");
 
-
         //Crea una lista para mostrar en cada fila de la tabla
         var result = [];
-
 
         cantidades.forEach(function(value, id) {
             result[id] = {
@@ -375,9 +361,7 @@
 </svg>
 
 
-
-
-                                           
+                                            
             <br/>
             <br/>
             <p class="info-tienda">
@@ -386,7 +370,7 @@
                 <br>
             </p>
         </div>
-       
+        
         <div class="label">
             <b>TICKET:</b>
             <h1 class="nro_boleta" id="nro_boleta_id" ></h1>
@@ -401,12 +385,10 @@
                 <b span id="hora"></b>
             </p>
 
-
         </div>
 
-
         <!-- <div class="line">***********************************************</div> -->
-       
+        
    
         <table class="table">
             <tbody id="tablaBody">
@@ -422,14 +404,11 @@
                         // ... otros objetos en el array
                     ];*/
 
-
                     var tablaBody = document.getElementById("tablaBody");
-
 
                     result.forEach(function(row) {
                     var newRow = document.createElement("tr");
                     newRow.className = "table-item";
-
 
                     newRow.innerHTML = `
                         <td class="item">${row.cantidad}</td>
@@ -443,9 +422,8 @@
                     spaceRow.innerHTML = `<td colspan="3">&nbsp;</td>`;
                     tablaBody.appendChild(spaceRow);
 
-
                 </script>
-                <!--
+                <!-- 
                 <tr class="table-footer top-line">
                     <td class=""  colspan="2" id="propincell"><h4>Propina Sugerida:</h4></td>
                     <td colspan="2"><h4 id="propina"></h4></td>
@@ -458,7 +436,7 @@
                 <tr class="table-footer">
                     <td colspan="2"><h2 id="medioPago">EFECTIVO:</h2></td>
                     <td colspan="2"><h2 id="efectivo"></h2></td>
-                   
+                    
                 </tr>
                 <tr class="table-footer top-line">
                     <td class=""  colspan="2"><h2>TOTAL:</h2></td>
@@ -469,8 +447,7 @@
                     <td colspan="2"><h2 id="devueltas"></h2></td>
                 </tr>
 
-
-               
+                
             </tbody>
         </table>
         <br/>
@@ -481,7 +458,7 @@
             <!--<p class="policy-title">
                 <b>IMPORTANTE:</b>
             </p>-->
-       
+        
             <p class="m-0">
                Contactos:
                <br/>
@@ -494,25 +471,23 @@
         var nroMesaElement = document.getElementById("nro_mesa_id").textContent = nro_mesa;
         var nroDireccion = document.getElementById("nro_direccion_id").textContent = direc;
 
-
-       
+        
        
         var totalElement = document.getElementById("total").textContent = total;
         var subtotal_descElement = document.getElementById("efectivo").textContent = descuento;
         var fechaElement = document.getElementById("fechaR").textContent = fecha;
         var fecha_entregaElement = document.getElementById("hora").textContent = fecha_entrega;
-     
+      
         if (mediodepago === "TARJETA" || mediodepago === "TRANSFERENCIA") {
           document.getElementById("medioPago").innerText = mediodepago + ":";
           document.getElementById("efectivo").textContent = total;
           document.getElementById("devueltas").style.display = "none";
           } else {
           document.getElementById("medioPago").innerText = "EFECTIVO:";
-         
+          
           }
         var descuentoElement = document.getElementById("devueltas").textContent = subtotal_desc;
         var estadoElement = document.getElementById("estado").textContent = estado;
     </script>
 </body>
 </html>
-
